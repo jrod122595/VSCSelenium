@@ -1,0 +1,26 @@
+{
+  "name": "selenium",
+  "version": "1.0.0",
+  "description": "Selenium Test GA 1.0",
+  "main": "BasicTesting.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrod122595/VSCSelenium.git"
+  },
+  "keywords": [
+    "initial",
+    "tests"
+  ],
+  "author": "Joshua Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrod122595/VSCSelenium/issues"
+  },
+  "homepage": "https://github.com/jrod122595/VSCSelenium#readme",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
