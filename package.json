@@ -1,33 +1,29 @@
 {
-  "name": "selenium",
+  "name": "seleniumtesting",
   "version": "1.0.0",
-  "description": "Selenium Test GA 1.0",
+  "description": "GA testing portals with selenium",
   "main": "BasicTesting.js",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chromedriver": "^2.38.3",
+    "coffeescript": "^2.3.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1"
+  },
   "scripts": {
-    "test": "Selenium"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jrod122595/VSCSelenium.git"
   },
-  "keywords": [
-    "initial",
-    "tests"
-  ],
   "author": "Joshua Rodriguez",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jrod122595/VSCSelenium/issues"
   },
-  "homepage": "https://github.com/jrod122595/VSCSelenium#readme",
-  "dependencies": {
-    "coffeescript": "^2.3.0"
-  },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
-    "chromedriver": "^2.38.3",
-    "mocha": "^5.1.1",
-    "selenium-webdriver": "^4.0.0-alpha.1"
-  }
+  "homepage": "https://github.com/jrod122595/VSCSelenium#readme"
 }
