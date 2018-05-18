@@ -6,27 +6,66 @@ var driver = new webdriver.Builder().
    build();
 
 // links chrome to testing site
-driver.get('http://testingportal.na-onbaseappsys.global.local/DTM/US/SNK/Home');
+// used to have it go to home but button click messed it up
+driver.get('http://testingportal.na-onbaseappsys.global.local/DTM/US/SNK/Application');
 
-
-//driver.findElement(webdriver.By.name('q')).sendKeys('simple programmer');
-// sample code to fill text box, still curious to why q and how to correctly use name
-
-// uses xpath to go to path(nest page) based on button click
-driver.findElement(webdriver.By.xpath("//button[@type='button']")).click();
-
+// uses xpath to go to path(next page) based on button click
 //gets to application fields page
 //have to figure out how to automatically pick between indiv or org in different cases
+/*driver.findElement(webdriver.By.xpath("//button[@type='button']")).click().then(function() {
+    drive.sleep(3000);
+}); */
 
-//also how to randomly generate names, probably a func for it
-//driver.findElement(webdriver.By.name('firstname')).sendKeys('josh');
+//fills in fields
+//also how to randomly generate fields, probably a func for it
+
+driver.findElement(webdriver.By.name("firstName")).sendKeys("Joshua");
+driver.findElement(webdriver.By.name("lastName")).sendKeys("Rodriguez");
+driver.findElement(webdriver.By.name("address1")).sendKeys("201 Easton Ave");
+driver.findElement(webdriver.By.name("city")).sendKeys("New Brunswick");
+driver.findElement(webdriver.By.name("zipCode")).sendKeys("07462");
+driver.findElement(webdriver.By.name("email")).sendKeys("jrodriguez@Global-Aero.com");
+driver.findElement(webdriver.By.name("confirmEmail")).sendKeys("jrodriguez@Global-Aero.com");
+driver.findElement(webdriver.By.name("phone")).sendKeys("2016630202");
+
+//drop down menu implementation
+//driver.findElement(webdriver.By.name("state")).sendKeys("New Jersey"); sometimes picks NB sometimes NJ
+
+// this driver.wait makes it only pick NJ with selectByVisibletext func
+driver.wait(
+    webdriver.until.elementLocated(webdriver.By.name("state")), 2000).then(element => {
+    selectByVisibleText(element, "New Jersey");
+});
+
+// clicks unknown checkbox
+driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
 
 
-driver.findElement(webdriver.By.id("application_insured_firstNameOfApplicant")).click();
-//driver.findElement(webdriver.By.name('firstName')).clear();
-driver.findElement(webdriver.By.id("application_insured_firstNameOfApplicant")).sendKeys("Josh");
 
+function selectByVisibleText(select, textDesired) {
+    select.findElements(webdriver.By.tagName('option'))
+    .then(options => {
+        options.map(option => {
+            option.getText().then(text => {
+                if (text == textDesired)
+                    option.click();
+            });
+        });
+    });
+}
 
-//driver.findElement(webdriver.By.name('Get a free quote')).click();
-//driver.findElement()
+function check_title() {
+    var promise = driver.getTitle().then(function(title) {
+        if (title === 'AIRCRAFT INSURANCE APPLICATION' )
+        {
+            console.log('success');
+            return true;
 
+        }
+        else
+        {
+            console.log('fail -- ' + title);
+        }
+    });
+return promise;
+}
