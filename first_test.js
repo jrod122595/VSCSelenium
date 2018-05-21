@@ -7,7 +7,7 @@ var driver = new webdriver.Builder().
 
 // links chrome to testing site
 // used to have it go to home but button click messed it up
-driver.get('http://testingportal.na-onbaseappsys.global.local/DTM/US/SNK/Application');
+driver.get('https://testingportal.ut.aeroinsure.com/DTM/US/UAS/Application');
 
 // uses xpath to go to path(next page) based on button click
 //gets to application fields page
@@ -19,9 +19,13 @@ driver.get('http://testingportal.na-onbaseappsys.global.local/DTM/US/SNK/Applica
 //fills in fields
 //also how to randomly generate fields, probably a func for it
 
+driver.findElement(webdriver.By.xpath("//div[@id='applicantDetails']/div/div/label")).click();
+
+driver.sleep(2000);
+
 driver.findElement(webdriver.By.name("firstName")).sendKeys("Joshua");
 driver.findElement(webdriver.By.name("lastName")).sendKeys("Rodriguez");
-driver.findElement(webdriver.By.name("address1")).sendKeys("201 Easton Ave");
+driver.findElement(webdriver.By.name("addressLine1")).sendKeys("201 Easton Ave");
 driver.findElement(webdriver.By.name("city")).sendKeys("New Brunswick");
 driver.findElement(webdriver.By.name("zipCode")).sendKeys("07462");
 driver.findElement(webdriver.By.name("email")).sendKeys("jrodriguez@Global-Aero.com");
@@ -38,10 +42,19 @@ driver.wait(
 });
 
 // clicks unknown checkbox
+
 driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
 
+//driver.findElement(webdriver.By.xpath("//div[@id='applicantForm']/div/form/div/div/div/div/div/ng-form/div/div[6]/div")).sendKeys("robot");
 
 
+//driver.sleep(10000);
+
+//driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click();
+//driver.wait(
+    //webdriver.until.elementLocated(webdriver.By.xpath("//input[@value='Continue']")), 20000).then(driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click());
+
+//function that searches through drop downs
 function selectByVisibleText(select, textDesired) {
     select.findElements(webdriver.By.tagName('option'))
     .then(options => {
@@ -53,6 +66,8 @@ function selectByVisibleText(select, textDesired) {
         });
     });
 }
+
+
 
 function check_title() {
     var promise = driver.getTitle().then(function(title) {
