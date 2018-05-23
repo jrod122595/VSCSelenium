@@ -17,52 +17,51 @@
 
 'use strict';
 
-const assert = require('assert');
-
+const assert = require('../testing/assert');
 const chrome = require('../chrome');
 const edge = require('../edge');
-const error = require('../lib/error');
 const firefox = require('../firefox');
 const ie = require('../ie');
+const opera = require('../opera');
+const phantomjs = require('../phantomjs');
 const safari = require('../safari');
 const test = require('../lib/test');
 const {Browser} = require('../lib/capabilities');
 const {Pages} = require('../lib/test');
-const {Builder, Capabilities, WebDriver} = require('..');
+const {WebDriver} = require('..');
 
 
 test.suite(function(env) {
-  const browsers = (...args) => env.browsers(...args);
+  var browsers = env.browsers;
 
   const BROWSER_MAP = new Map([
     [Browser.CHROME, chrome.Driver],
     [Browser.EDGE, edge.Driver],
     [Browser.FIREFOX, firefox.Driver],
     [Browser.INTERNET_EXPLORER, ie.Driver],
+    [Browser.OPERA, opera.Driver],
+    [Browser.PHANTOM_JS, phantomjs.Driver],
     [Browser.SAFARI, safari.Driver],
   ]);
 
-  if (BROWSER_MAP.has(env.browser.name)) {
+  if (BROWSER_MAP.has(env.currentBrowser())) {
     describe('builder creates thenable driver instances', function() {
       let driver;
 
       after(() => driver && driver.quit());
 
-      it(env.browser.name, function() {
+      it(env.currentBrowser(), function() {
         driver = env.builder().build();
 
-        const want = BROWSER_MAP.get(env.browser.name);
-        assert.ok(
-            driver instanceof want,
+        const want = BROWSER_MAP.get(env.currentBrowser());
+        assert(driver).instanceOf(want,
             `want ${want.name}, but got ${driver.name}`);
-        assert.equal(typeof driver.then, 'function');
+        assert(typeof driver.then).equalTo('function');
 
         return driver
             .then(
-                d =>
-                    assert.ok(
-                        d instanceof want,
-                        `want ${want.name}, but got ${d.name}`))
+                d => assert(d)
+                    .instanceOf(want, `want ${want.name}, but got ${d.name}`))
             // Load something so the safari driver doesn't crash from starting and
             // stopping in short time.
             .then(() => driver.get(Pages.echoPage));
@@ -70,37 +69,31 @@ test.suite(function(env) {
     });
   }
 
-  class OptionsTest {
-    constructor(ctor, key) {
-      this.ctor = ctor;
-      this.key = key;
-    }
-  }
+  describe('session management', function() {
+    var driver;
+    test.before(function*() {
+      driver = yield env.builder().build();
+    });
 
-});
+    test.after(function() {
+      return driver.quit();
+    });
 
-describe('Builder', function() {
-  describe('catches incorrect use of browser options class', function() {
-    function test(key, options) {
-      it(key, async function() {
-        let builder = new Builder()
-            .withCapabilities(new Capabilities()
-                .set('browserName', 'fake-browser-should-not-try-to-start')
-                .set(key, new options()));
-        try {
-          let driver = await builder.build();
-          await driver.quit();
-          return Promise.reject(Error('should have failed'));
-        } catch (ex) {
-          if (!(ex instanceof error.InvalidArgumentError)) {
-            throw ex;
-          }
-        }
+    test.it('can connect to an existing session', function*() {
+      yield driver.get(Pages.simpleTestPage);
+      yield assert(driver.getTitle()).equalTo('Hello WebDriver');
+
+      return driver.getSession().then(session1 => {
+        let driver2 = WebDriver.attachToSession(
+            driver.getExecutor(),
+            session1.getId());
+
+        return assert(driver2.getTitle()).equalTo('Hello WebDriver')
+            .then(_ => {
+              let session2Id = driver2.getSession().then(s => s.getId());
+              return assert(session2Id).equalTo(session1.getId());
+            });
       });
-    }
-
-    test('chromeOptions', chrome.Options);
-    test('moz:firefoxOptions', firefox.Options);
-    test('safari.options', safari.Options);
+    });
   });
 });

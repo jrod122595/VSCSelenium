@@ -20,22 +20,11 @@ driver.findElement(webdriver.By.xpath("//button[@type='button']")).click().then(
 
 function fields() {
 
-    //drop down menu implementation
-    // this driver.wait makes it only pick NJ with selectByVisibletext func
-driver.wait(
-    webdriver.until.elementLocated(webdriver.By.name("state")), 1000).then(element => {
-    selectByVisibleText(element, "NEW JERSEY");
-});
-
-driver.wait(
-    webdriver.until.elementLocated(webdriver.By.name("lastInsuranceCarrier")), 2000).then(element => {
-    selectByVisibleText(element, "NONE");
-});
-
 //driver.findElement(webdriver.By.name("organizationName")).sendKeys("Global Aerospace");
-driver.findElement(webdriver.By.name("firstName")).sendKeys("Joshua");
 //driver.findElement(webdriver.By.name("organizationContactFirstName")).sendKeys("Joshua");
 //driver.findElement(webdriver.By.name("organizationContactLastName")).sendKeys("Rodriguez");
+
+driver.findElement(webdriver.By.name("firstName")).sendKeys("Joshua");
 driver.findElement(webdriver.By.name("lastName")).sendKeys("Rodriguez");
 driver.findElement(webdriver.By.name("addressLine1")).sendKeys("201 Easton Ave");
 driver.findElement(webdriver.By.name("city")).sendKeys("New Brunswick");
@@ -44,12 +33,23 @@ driver.findElement(webdriver.By.name("email")).sendKeys("jrodriguez@Global-Aero.
 driver.findElement(webdriver.By.name("confirmEmail")).sendKeys("jrodriguez@Global-Aero.com");
 driver.findElement(webdriver.By.name("phoneOfApplicant")).sendKeys("2016630202");
 
+    //drop down menu implementation
+    // this driver.wait makes it only pick NJ with selectByVisibletext func
+driver.wait(
+    webdriver.until.elementLocated(webdriver.By.name("state")), 10).then(element => {
+    selectByVisibleText(element, "NEW JERSEY");
+});
+
+driver.wait(
+    webdriver.until.elementLocated(webdriver.By.name("lastInsuranceCarrier")), 10).then(element => {
+    selectByVisibleText(element, "NONE");
+});
+
 //clicks checkbox
-//driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
+driver.findElement(webdriver.By.className("recaptcha-checkbox-checkmark")).click();
 
-//driver.findElement(webdriver.By.xpath("//div[@id='applicantForm']/div/form/div/div/div/div/div/ng-form/div/div[6]/div")).sendKeys("robot");
+driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click();
 
-//driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click();
 }
 
 //function that searches through drop downs
