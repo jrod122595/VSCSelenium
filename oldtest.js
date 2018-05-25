@@ -11,7 +11,6 @@ var driver = new webdriver.Builder().
 // used to have it go to home but button click messed it up
 driver.get('http://testingportal.na-onbaseappsys.global.local/DTM/US/SNK/Application');
 
-
 // uses xpath to go to path(next page) based on button click
 //gets to application fields page
 //have to figure out how to automatically pick between indiv or org in different cases

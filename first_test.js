@@ -46,7 +46,7 @@ driver.wait(
 });
 
 //clicks checkbox
-driver.findElement(webdriver.By.className("recaptcha-checkbox-checkmark")).click();
+//driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
 
 driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click();
 
