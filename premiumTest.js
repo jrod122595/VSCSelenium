@@ -13,7 +13,7 @@ driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
 driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
 
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
-    driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 10000).then(function() {
+    driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 20000).then(function() {
         driver.findElement(webdriver.By.linkText("NEW APPLICATION")).click().then(function() {
             driver.findElement(webdriver.By.xpath("//div[@id='header']/div/div/div[2]/ul/li[3]/ul/li[2]")).click().then(function() {
                 driver.wait(webdriver.until.elementLocated(webdriver.By.className("aeroinsureSubHeader underlined")), 5000).then(function() {

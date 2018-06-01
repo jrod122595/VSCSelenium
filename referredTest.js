@@ -13,7 +13,7 @@ driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
 driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
 
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
-    driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 10000).then(function() {
+    driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 20000).then(function() {
         driver.findElement(webdriver.By.linkText("NEW APPLICATION")).click().then(function() {
             driver.findElement(webdriver.By.xpath("//div[@id='header']/div/div/div[2]/ul/li[3]/ul/li[2]")).click().then(function() {
                 driver.wait(webdriver.until.elementLocated(webdriver.By.className("aeroinsureSubHeader underlined")), 5000).then(function() {
@@ -66,8 +66,8 @@ driver.findElement(webdriver.By.id("operations_operationQuestions_operatedOverPe
 driver.findElement(webdriver.By.id("operations_operationQuestions_publishData-1")).click();
 driver.findElement(webdriver.By.id("operations_operationQuestions_highLiabilityLimit-1")).click();
 driver.findElement(webdriver.By.id("d1d20449-414e-4f1b-86a5-02169db6f5dd")).click();
-//driver.findElement(webdriver.By.id("434a74cd-0aaa-49ec-bbeb-4b09a7566e05")).click();
-//driver.findElement(webdriver.By.id("8099922a-6150-4d6e-8b53-76be01614005")).click();
+driver.findElement(webdriver.By.id("434a74cd-0aaa-49ec-bbeb-4b09a7566e05")).click();
+driver.findElement(webdriver.By.id("8099922a-6150-4d6e-8b53-76be01614005")).click();
 driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[2]")).click().then(function() {
     driver.wait(webdriver.until.elementLocated(webdriver.By.id("quoteNumber")), 2000).then(function() {
         driver.findElement(webdriver.By.xpath("//label[@name='physicalDamageRequired']")).click().then(function() {
@@ -133,10 +133,11 @@ function operatorToClaimFields() {
     
 }
 
+
 function claimAndliability() {
     driver.findElement(webdriver.By.id("applicantInformation_liability_liabilityPremium_2000000")).click();
     driver.findElement(webdriver.By.id("applicantInformation_liability_personalInjuryLimit_2000000")).click();
-    //driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
+    driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
 }
 
 //function that searches through drop downs
@@ -151,3 +152,4 @@ function selectByVisibleText(select, textDesired) {
         });
     });
 }
+
