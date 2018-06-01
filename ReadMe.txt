@@ -16,9 +16,9 @@ On the premium side my goal is to also get through to the payment screen but sin
 These tests will also add more logic to them so that there is some variability to the tests.
 
 How to run the tests:
-Open files on visual studio then input "node file_name.js" in the terminal and click enter and the chrome window should pop up within a few seconds.
+Open files on visual studio then input "node referredTest.js" or "node premiumTest.js" in the terminal and click enter and the chrome window should pop up within a few seconds.
 
-If any errors occur, close the window, rerun the file and let me know the error.
+If any errors occur, close the window, rerun the test case and let me know the error.
 
 Contact jrodriguez@Global-Aero.com or 2016630202 for any suggestions or concerns. Any input would be appreciated!
 
