@@ -121,7 +121,7 @@ function claimAndliability() {
     }).then(function(){
     driver.findElement(webdriver.By.id("applicantInformation_liability_liabilityPremium_2000000")).click();
     driver.findElement(webdriver.By.id("applicantInformation_liability_personalInjuryLimit_2000000")).click();
-    //driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
+    driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
     });
 }
 

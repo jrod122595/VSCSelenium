@@ -2,7 +2,7 @@
   "name": "seleniumtesting",
   "version": "1.0.0",
   "description": "GA testing portals with selenium",
-  "main": "BasicTesting.js",
+  "main": "brokertest.js",
   "dependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
