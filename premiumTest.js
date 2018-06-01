@@ -1,11 +1,11 @@
 var webdriver = require('selenium-webdriver');
-var fs = require('fs');
+
 //will add compatability for other browsers in future
 var driver = new webdriver.Builder().
    withCapabilities(webdriver.Capabilities.chrome()).
    build();
 
-   //login page
+//login page
 driver.get('https://portaluat.global-aero.com/Login');
 
 //log in
@@ -13,10 +13,10 @@ driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
 driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
 
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
-    driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 10000).then(function() {
+    driver.sleep(1000).then(function() {
         driver.findElement(webdriver.By.linkText("NEW APPLICATION")).click().then(function() {
             driver.findElement(webdriver.By.xpath("//div[@id='header']/div/div/div[2]/ul/li[3]/ul/li[2]")).click().then(function() {
-                driver.wait(webdriver.until.elementLocated(webdriver.By.className("aeroinsureSubHeader underlined")), 5000).then(function() {
+                driver.sleep(2000).then(function() {
                     driver.findElement(webdriver.By.xpath("//div[@id='applicantDetails']/div/div/label")).click().then(function() {
                         applicantFields();
                     });
@@ -36,8 +36,7 @@ driver.findElement(webdriver.By.name("email")).sendKeys("jrodriguez@Global-Aero.
 driver.findElement(webdriver.By.name("confirmEmail")).sendKeys("jrodriguez@Global-Aero.com");
 driver.findElement(webdriver.By.name("phoneOfApplicant")).sendKeys("2016630202");
     
-    //drop down menu implementation
-    // this driver.wait makes it only pick NJ with selectByVisibletext func
+//drop down menu implementation
 driver.wait(
     webdriver.until.elementLocated(webdriver.By.name("state")), 10).then(element => {
     selectByVisibleText(element, "NEW JERSEY");
@@ -52,7 +51,7 @@ driver.wait(
 //driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
 
 driver.findElement(webdriver.By.xpath("//input[@value='Continue']")).click().then(function() {
-    driver.wait(webdriver.until.elementLocated(webdriver.By.id("quoteNumber")), 2000).then(function() {
+    driver.sleep(1000).then(function() {
         operationsFields();
     });
 });
@@ -66,11 +65,10 @@ driver.findElement(webdriver.By.id("operations_operationQuestions_operatedOverPe
 driver.findElement(webdriver.By.id("operations_operationQuestions_publishData-1")).click();
 driver.findElement(webdriver.By.id("operations_operationQuestions_highLiabilityLimit-1")).click();
 driver.findElement(webdriver.By.id("d1d20449-414e-4f1b-86a5-02169db6f5dd")).click();
-//driver.findElement(webdriver.By.id("434a74cd-0aaa-49ec-bbeb-4b09a7566e05")).click();
-//driver.findElement(webdriver.By.id("8099922a-6150-4d6e-8b53-76be01614005")).click();
+
 driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[2]")).click().then(function() {
-    driver.wait(webdriver.until.elementLocated(webdriver.By.id("quoteNumber")), 2000).then(function() {
-        driver.findElement(webdriver.By.xpath("//label[@name='physicalDamageRequired']")).click().then(function() {
+    driver.sleep(1000).then(function() {
+        driver.findElement(webdriver.By.xpath("//label[@name='physicalDamageNotRequired']")).click().then(function() {
             droneFields();
         });
     });    
@@ -90,19 +88,11 @@ function droneFields() {
     });
     
     driver.findElement(webdriver.By.name("unknownUasSerial")).click();
-    driver.findElement(webdriver.By.name("UASInsuredValue")).sendKeys("100000");
     driver.findElement(webdriver.By.name("UASManufactureYear")).sendKeys("2018");
     driver.findElement(webdriver.By.name("UASEstimatedAnnualFlightHours")).sendKeys("1000");
     driver.findElement(webdriver.By.name("addUAS")).click();
-    driver.findElement(webdriver.By.xpath("//label[@name='sparePartsNotRequired']")).click();
-    driver.findElement(webdriver.By.xpath("(//label[@name='sparePartsNotRequired'])[2]")).click();
-    driver.findElement(webdriver.By.xpath("(//label[@name='sparePartsRequired'])[3]")).click();
-    driver.findElement(webdriver.By.id("valueparts")).sendKeys("100000");
-    driver.findElement(webdriver.By.xpath("//label[@name='nonOwnedUASRequired']")).click();
-    driver.findElement(webdriver.By.id("nonOwnedInsuredValue")).sendKeys("10000");
-    driver.findElement(webdriver.By.xpath("//label[@name='nonOwnedPayloadNotRequired']")).click();
     driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[3]")).click().then(function() {
-        driver.wait(webdriver.until.elementLocated(webdriver.By.id("quoteNumber")), 2000).then(function() {
+        driver.sleep(1000).then(function() {
             operatorToClaimFields();
          });
     });
@@ -116,21 +106,13 @@ function operatorToClaimFields() {
     driver.findElement(webdriver.By.xpath("//label[@name='accidentsOrIncidentsNo']")).click();
     driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[5]")).click().then(function() {
         driver.sleep(5000).then(function() {
-            driver.takeScreenshot().then(function(image, error) {
-                fs.writeFile('fileout.png', image, 'base64', function(error){
-                    if (error != null)
-                    console.log('error occured while saving screenshot' + error);
-                });
-            }).then(function(){
-                    driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[6]")).click().then(function() {
-                        driver.wait(webdriver.until.elementLocated(webdriver.By.id("quoteNumber")), 5000).then(function() {
-                            claimAndliability();
-                        });
-                    });
+            driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[6]")).click().then(function() {
+                driver.sleep(1000).then(function() {
+                    claimAndliability();
                 });
             });
          });
-    
+    });
 }
 
 function claimAndliability() {
