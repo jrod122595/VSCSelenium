@@ -13,10 +13,10 @@ driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
 driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
 
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
-    driver.sleep(500).then(function() {
+    driver.sleep(1000).then(function() {
         driver.findElement(webdriver.By.linkText("NEW APPLICATION")).click().then(function() {
             driver.findElement(webdriver.By.xpath("//div[@id='header']/div/div/div[2]/ul/li[3]/ul/li[2]")).click().then(function() {
-                driver.sleep(100).then(function() {
+                driver.sleep(1000).then(function() {
                     driver.findElement(webdriver.By.xpath("//div[@id='applicantDetails']/div/div/label")).click().then(function() {
                         applicantFields();
                     });
@@ -128,7 +128,7 @@ function operatorToClaimFields() {
 function claimAndliability() {
     driver.findElement(webdriver.By.id("applicantInformation_liability_liabilityPremium_2000000")).click();
     driver.findElement(webdriver.By.id("applicantInformation_liability_personalInjuryLimit_2000000")).click();
-    driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
+   // driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
 }
 //function that searches through drop downs
 function selectByVisibleText(select, textDesired) {
