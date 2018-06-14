@@ -8,6 +8,7 @@ var driver = new webdriver.Builder().
    //login page
 driver.get('https://portaluat.global-aero.com/Login');
 
+driver.manage().window().maximize();
 //log in
 driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
 driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
