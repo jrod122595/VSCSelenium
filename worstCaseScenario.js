@@ -200,6 +200,8 @@ function operatorFields() {
     driver.findElement(webdriver.By.xpath("//label[@name='cat45sUASnamedOperatorYes']")).click();
     driver.findElement(webdriver.By.xpath("//input[@type='checkbox']")).click();
     driver.findElement(webdriver.By.xpath("(//input[@type='number'])[2]")).sendKeys("1000");
+
+    //I do not like the sleep func in here but the wait function would not work and I have yet to have any errors
     driver.findElement(webdriver.By.xpath("//input[@value='Save']")).click().then(function() {
         driver.sleep(1000).then(function() {
             driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[4]")).click().then(function() {
@@ -213,9 +215,13 @@ function operatorFields() {
 
 function claimFields() {
     
-    driver.findElement(webdriver.By.xpath("//label[@name='medicalWaiversNo']")).click();
+    driver.findElement(webdriver.By.xpath("//label[@name='medicalWaiversYes']")).click();
     driver.findElement(webdriver.By.xpath("//label[@name='violationsOrSuspensionsNo']")).click();
     driver.findElement(webdriver.By.xpath("//label[@name='accidentsOrIncidentsNo']")).click();
+    driver.findElement(webdriver.By.id("applicantInformation_claims_insuranceClaimsHistoryDetails")).sendKeys("I'm Blind");
+
+    //I do not like the sleep function but since it takes long for the page to process the claim I have not had luck with the wait function
+    //I also have had no errors since implementing it at 5000 milliseconds
     driver.findElement(webdriver.By.xpath("(//input[@value='Continue'])[5]")).click().then(function() {
         driver.sleep(5000).then(function() {
             //continue, loads page, claim screenshot and liability fields
@@ -228,19 +234,24 @@ function claimFields() {
     });  
 }
 
-
-
 function screenshotAndliability() {
 
-    //screenshot implementation, as of right now it saves the new picture over the previous one, I can make them save separately but just do not want 1000 picture files right now
+    /*screenshot implementation, as of right now it saves the new picture over the previous one
+    I can make them save separately but just do not want 1000 picture files right now
+    Also figuring out a way to screenshot entire page instead of specific section
+    */
     driver.takeScreenshot().then(function(image, error) {
-        fs.writeFile('Premiums.png', image, 'base64', function(error){
+        fs.writeFile('Claims.png', image, 'base64', function(error){
             if (error != null)
             console.log('error occured while saving screenshot' + error);
         });
     }).then(function(){
+
+        //liability info
     driver.findElement(webdriver.By.id("applicantInformation_liability_liabilityPremium_2000000")).click();
     driver.findElement(webdriver.By.id("applicantInformation_liability_personalInjuryLimit_2000000")).click();
+
+    //final submit button, comment out if you dont want to submit the application
     driver.findElement(webdriver.By.xpath("//input[@value='Submit']")).click();
     });
 }
