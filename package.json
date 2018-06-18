@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://eu-mig:8080/tfs/DefaultCollection/GlobalPortalAgile/_git/GlobalPortalAutomationTests"
+    "url": "https://github.com/jrod122595/VSCSelenium"
   },
   "author": "Joshua Rodriguez",
   "license": "ISC",
