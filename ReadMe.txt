@@ -18,9 +18,10 @@ These tests will also add more logic to them so that there is some variability t
 My newest implementation, worstCaseScenario.js, tests the limits of all the functionality on the broker site.
 It adds each <15lb, 15-55lb, and 55+lb drones with all insurance information and popups filled out.
 It is completely annotated so it is alot easier to understand in comparison to the other files.
+Error ratio is about 1 out of 100 test cases right now.
 
 How to run the tests:
-Open files on visual studio then input "Node worstCaseScenario.js" in the terminal and click enter and the chrome window should pop up within a few seconds.
+Open files on visual studio then input "Node worstCaseScenario.js" in the terminal and click enter and the chrome window should pop up shortly.
 
 If any errors occur, close the window, rerun the test case and let me know the error.
 
