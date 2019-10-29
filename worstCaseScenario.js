@@ -13,7 +13,7 @@ driver.manage().window().maximize();
 
 //log in info
 driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
-driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
+driver.findElement(webdriver.By.id("inputPassword")).sendKeys("********");
 
 //nested promises to get through to the actual UAS application screen
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
