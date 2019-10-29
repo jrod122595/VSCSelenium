@@ -10,7 +10,7 @@ driver.get('https://portaluat.global-aero.com/Login');
 
 //log in
 driver.findElement(webdriver.By.id("inputEmail")).sendKeys("jrodriguez");
-driver.findElement(webdriver.By.id("inputPassword")).sendKeys("Test@123");
+driver.findElement(webdriver.By.id("inputPassword")).sendKeys("*******");
 
 driver.findElement(webdriver.By.xpath("//input[@value='Login']")).click().then(function() {
     driver.wait(webdriver.until.elementLocated(webdriver.By.linkText("NEW APPLICATION")), 10000).then(function() {
